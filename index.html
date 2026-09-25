@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاجة صغيرة ليكي 🩵</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(circle at 50% 20%,
+    #263b75 0%,
+    #111d46 38%,
+    #05091d 75%,
+    #02030b 100%);
+  color:white;
+}
+
+/* =========================
+   النجوم الخلفية
+========================= */
+
+#sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+}
+
+.bg-star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  opacity:.6;
+  animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:.2}
+  50%{opacity:1}
+}
+
+/* =========================
+   الشاشات
+========================= */
+
+.screen{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  text-align:center;
+
+  z-index:10;
+}
+
+/* =========================
+   شاشة كلمة السر
+========================= */
+
+#passwordScreen{
+  background:
+    radial-gradient(circle at center,
+    rgba(29,49,100,.45),
+    rgba(2,5,18,.9));
+
+  backdrop-filter:blur(5px);
+}
+
+.password-box{
+  width:min(430px,92vw);
+
+  padding:38px 28px;
+
+  border-radius:30px;
+
+  background:rgba(8,15,42,.78);
+
+  border:1px solid rgba(255,255,255,.15);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.45);
+
+  animation:appear .8s ease;
+}
+
+.lock{
+  font-size:55px;
+  margin-bottom:20px;
+}
+
+.password-box h1{
+  font-size:30px;
+  margin-bottom:15px;
+}
+
+.password-box p{
+  font-size:16px;
+  line-height:1.9;
+  color:rgba(255,255,255,.75);
+  margin-bottom:25px;
+}
+
+.password-input{
+  width:100%;
+
+  padding:14px 18px;
+
+  border:none;
+  outline:none;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.1);
+
+  color:white;
+
+  text-align:center;
+
+  font-size:17px;
+}
+
+.password-input::placeholder{
+  color:rgba(255,255,255,.45);
+}
+
+.open-button{
+  width:100%;
+
+  margin-top:15px;
+
+  padding:13px;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.15);
+
+  color:white;
+
+  font-size:16px;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.open-button:hover{
+  background:rgba(255,255,255,.25);
+  transform:translateY(-2px);
+}
+
+.error{
+  height:24px;
+
+  margin-top:10px;
+
+  color:#ffb5c5;
+
+  font-size:14px;
+}
+
+/* =========================
+   الصفحة الرئيسية
+========================= */
+
+#mainScreen{
+  display:none;
+}
+
+.intro{
+  max-width:700px;
+  animation:appear 1s ease;
+}
+
+.moon{
+  width:90px;
+  height:90px;
+
+  margin:0 auto 28px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(circle at 35% 30%,
+    #fff,
+    #dceaff 55%,
+    #a9c4ef);
+
+  box-shadow:
+    0 0 30px rgba(190,220,255,.75),
+    0 0 90px rgba(100,160,255,.3);
+}
+
+.intro h1{
+  font-size:clamp(35px,7vw,65px);
+
+  margin-bottom:18px;
+
+  text-shadow:
+    0 0 25px rgba(180,210,255,.7);
+}
+
+.intro p{
+  font-size:clamp(16px,3vw,21px);
+
+  line-height:2;
+
+  color:rgba(255,255,255,.85);
+}
+
+.hint{
+  margin-top:30px;
+
+  font-size:14px !important;
+
+  color:rgba(255,255,255,.55) !important;
+
+  animation:hint 2s infinite;
+}
+
+@keyframes hint{
+  50%{opacity:.4}
+}
+
+/* =========================
+   النجوم التفاعلية
+========================= */
+
+.star{
+  position:absolute;
+
+  width:17px;
+  height:17px;
+
+  border-radius:50%;
+
+  background:white;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 10px 3px white,
+    0 0 30px 8px rgba(120,180,255,.6);
+
+  animation:pulse 2.5s infinite;
+
+  z-index:20;
+
+  transition:.3s;
+}
+
+.star:before,
+.star:after{
+  content:"";
+
+  position:absolute;
+
+  background:rgba(255,255,255,.7);
+}
+
+.star:before{
+  width:2px;
+  height:36px;
+
+  left:7px;
+  top:-9px;
+}
+
+.star:after{
+  height:2px;
+  width:36px;
+
+  top:7px;
+  left:-9px;
+}
+
+.star:hover{
+  transform:scale(1.8);
+}
+
+.star.opened{
+  opacity:0;
+  transform:scale(0);
+  pointer-events:none;
+}
+
+@keyframes pulse{
+  0%,100%{
+    transform:scale(.8);
+    opacity:.65;
+  }
+
+  50%{
+    transform:scale(1.2);
+    opacity:1;
+  }
+}
+
+/* =========================
+   بطاقة الرسالة
+========================= */
+
+#messageCard{
+  display:none;
+
+  width:min(650px,92vw);
+
+  padding:35px 28px;
+
+  border-radius:28px;
+
+  background:rgba(8,15,42,.82);
+
+  border:1px solid rgba(255,255,255,.15);
+
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.45);
+
+  z-index:30;
+
+  animation:appear .5s ease;
+}
+
+#messageCard.active{
+  display:block;
+}
+
+.icon{
+  font-size:43px;
+  margin-bottom:15px;
+}
+
+#messageTitle{
+  font-size:27px;
+  margin-bottom:18px;
+}
+
+#messageText{
+  font-size:19px;
+  line-height:2.1;
+  color:rgba(255,255,255,.9);
+}
+
+.continue{
+  margin-top:25px;
+
+  padding:11px 25px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.13);
+
+  color:white;
+
+  cursor:pointer;
+
+  font-size:15px;
+}
+
+/* =========================
+   النهاية
+========================= */
+
+#finalScreen{
+  position:fixed;
+
+  inset:0;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  text-align:center;
+
+  z-index:100;
+
+  background:
+    radial-gradient(circle at center,
+    #1b2d5e,
+    #091331 50%,
+    #02040d 100%);
+
+  animation:appear 1s ease;
+}
+
+#finalScreen.active{
+  display:flex;
+}
+
+.final-box{
+  width:min(750px,92vw);
+}
+
+.final-heart{
+  font-size:55px;
+
+  animation:heart 1.6s infinite;
+}
+
+@keyframes heart{
+  50%{
+    transform:scale(1.18);
+  }
+}
+
+.final-box h2{
+  font-size:clamp(32px,6vw,55px);
+
+  margin:20px 0;
+
+  text-shadow:
+    0 0 25px rgba(170,205,255,.7);
+}
+
+.final-box p{
+  font-size:clamp(17px,3vw,21px);
+
+  line-height:2.2;
+
+  color:rgba(255,255,255,.9);
+}
+
+.final-sign{
+  margin-top:28px;
+
+  color:rgba(255,255,255,.6);
+
+  font-size:15px;
+}
+
+/* =========================
+   أنيميشن عام
+========================= */
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@media(max-width:600px){
+
+  .password-box{
+    padding:32px 22px;
+  }
+
+  .moon{
+    width:75px;
+    height:75px;
+  }
+
+  #messageText{
+    font-size:17px;
+  }
+
+  .star{
+    width:15px;
+    height:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     السماء
+========================= -->
+
+<div id="sky"></div>
+
+
+<!-- =========================
+     شاشة كلمة السر
+========================= -->
+
+<section
+  id="passwordScreen"
+  class="screen">
+
+  <div class="password-box">
+
+    <div class="lock">
+      🔐
+    </div>
+
+    <h1>
+      حاجة صغيرة ليكي
+    </h1>
+
+    <p>
+      في مفاجأة بسيطة مستنياكي...
+      <br>
+      بس الأول محتاجة كلمة السر 🩵
+    </p>
+
+    <input
+      id="password"
+      class="password-input"
+      type="password"
+      placeholder="اكتبي كلمة السر">
+
+    <button
+      id="openButton"
+      class="open-button">
+      افتحي المفاجأة ✨
+    </button>
+
+    <div
+      id="error"
+      class="error">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     الشاشة الرئيسية
+========================= -->
+
+<section
+  id="mainScreen"
+  class="screen">
+
+  <div
+    class="intro"
+    id="intro">
+
+    <div class="moon"></div>
+
+    <h1>
+      رسالة من النجوم ✨
+    </h1>
+
+    <p>
+      في السما دي شوية كلام صغير...
+      <br>
+      بس كل كلمة فيهم معمولة مخصوص عشانك 🩵
+    </p>
+
+    <p class="hint">
+      دوسي على النجوم واحدة واحدة ✨
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     النجوم
+========================= -->
+
+<div id="stars">
+
+  <div class="star"
+       style="left:12%;top:22%"
+       data-index="0">
+  </div>
+
+  <div class="star"
+       style="left:29%;top:68%"
+       data-index="1">
+  </div>
+
+  <div class="star"
+       style="left:47%;top:25%"
+       data-index="2">
+  </div>
+
+  <div class="star"
+       style="left:68%;top:72%"
+       data-index="3">
+  </div>
+
+  <div class="star"
+       style="left:84%;top:32%"
+       data-index="4">
+  </div>
+
+  <div class="star"
+       style="left:91%;top:65%"
+       data-index="5">
+  </div>
+
+</div>
+
+
+<!-- =========================
+     بطاقة الرسالة
+========================= -->
+
+<div
+  id="messageCard">
+
+  <div
+    class="icon"
+    id="messageIcon">
+    ✨
+  </div>
+
+  <h2 id="messageTitle"></h2>
+
+  <p id="messageText"></p>
+
+  <button
+    class="continue"
+    id="continueButton">
+    كمّلي الرحلة ✨
+  </button>
+
+</div>
+
+
+<!-- =========================
+     النهاية
+========================= -->
+
+<section id="finalScreen">
+
+  <div class="final-box">
+
+    <div class="final-heart">
+      🩵
+    </div>
+
+    <h2>
+      وآخر نجمة ليكي ✨
+    </h2>
+
+    <p>
+
+      كل سنة وانتي طيبة،
+      وكل سنة وانتي بخير وسعادة وراحة بال. 🩵
+
+      <br><br>
+
+      يمكن السما مليانة نجوم،
+      بس في ناس وجودهم لوحده
+      بيخلّي الدنيا أنور...
+
+      <br>
+
+      وانتي من الناس دي. 🩵
+
+      <br><br>
+
+      يا رب سنتك الجديدة تكون
+      أحلى من كل اللي فات،
+      وتلاقي فيها كل الخير
+      اللي نفسك فيه.
+
+      <br><br>
+
+      <strong>
+        عيد ميلاد سعيد يا كل الخير 🩵
+      </strong>
+
+    </p>
+
+    <div class="final-sign">
+      من شخص بيتمنى يشوفك دايمًا بخير 🩵
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =================================================
+   🔐 كلمة السر
+================================================= */
+
+/*
+   غير كلمة السر هنا فقط.
+
+   مثال:
+   const CORRECT_PASSWORD = "123456";
+
+   أو:
+   const CORRECT_PASSWORD = "birthday";
+*/
+
+const CORRECT_PASSWORD = "moon2026";
+
+
+/* =================================================
+   إنشاء النجوم الصغيرة في الخلفية
+================================================= */
+
+const sky =
+  document.getElementById("sky");
+
+for(let i = 0; i < 150; i++){
+
+  const star =
+    document.createElement("div");
+
+  star.className =
+    "bg-star";
+
+  star.style.left =
+    Math.random() * 100 + "%";
+
+  star.style.top =
+    Math.random() * 100 + "%";
+
+  const size =
+    Math.random() * 2 + 1;
+
+  star.style.width =
+    size + "px";
+
+  star.style.height =
+    size + "px";
+
+  star.style.animationDelay =
+    Math.random() * 4 + "s";
+
+  sky.appendChild(star);
+}
+
+
+/* =================================================
+   عناصر كلمة السر
+================================================= */
+
+const passwordScreen =
+  document.getElementById("passwordScreen");
+
+const passwordInput =
+  document.getElementById("password");
+
+const openButton =
+  document.getElementById("openButton");
+
+const error =
+  document.getElementById("error");
+
+const mainScreen =
+  document.getElementById("mainScreen");
+
+
+/* =================================================
+   فتح المفاجأة
+================================================= */
+
+function checkPassword(){
+
+  const entered =
+    passwordInput.value.trim();
+
+  if(entered === CORRECT_PASSWORD){
+
+    passwordScreen.style.display =
+      "none";
+
+    mainScreen.style.display =
+      "flex";
+
+    error.textContent = "";
+
+  }
+
+  else{
+
+    error.textContent =
+      "الكلمة مش صح... جربي تاني 🩵";
+
+    passwordInput.value = "";
+
+    passwordInput.focus();
+
+  }
+
+}
+
+
+openButton.addEventListener(
+  "click",
+  checkPassword
+);
+
+
+passwordInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      checkPassword();
+
+    }
+
+  }
+);
+
+
+/* =================================================
+   رسائل النجوم
+================================================= */
+
+const messages = [
+
+  {
+    icon:"✨",
+
+    title:"أول نجمة",
+
+    text:
+    "طاب قلبك وروحك، وطاب كل شيء جميل فيكي... وجودك في حياة اللي حواليكي حاجة جميلة بجد."
+  },
+
+  {
+    icon:"🌙",
+
+    title:"نجمة تانية",
+
+    text:
+    "فيكي حاجة كده بتخلّي الكلام معاكي دايمًا له طعم مختلف، ووجودك بيخلّي الوقت أحلى."
+  },
+
+  {
+    icon:"💫",
+
+    title:"نجمة تالتة",
+
+    text:
+    "من أجمل الحاجات فيكي إنك بتعرفي تكوني سند من غير كلام كتير، وده شيء غالي ومش سهل."
+  },
+
+  {
+    icon:"🩵",
+
+    title:"نجمة رابعة",
+
+    text:
+    "أتمنى كل حاجة حلوة بتتمنيها تلاقي طريقها ليكي، وكل حلم نفسك تحققيه يبقى حقيقة."
+  },
+
+  {
+    icon:"🌟",
+
+    title:"نجمة خامسة",
+
+    text:
+    "يا رب سنتك الجديدة تكون مليانة ضحك وفرحة ونجاحات وذكريات حلوة تفضلي فاكرها دايمًا."
+  },
+
+  {
+    icon:"🎂",
+
+    title:"آخر نجمة",
+
+    text:
+    "وفي يوم زي ده، أهم حاجة عندي إنك تفضلي بخير ومبسوطة، وربنا يديم في حياتك كل حاجة حلوة."
+  }
+
+];
+
+
+/* =================================================
+   عناصر الرسائل
+================================================= */
+
+const stars =
+  document.querySelectorAll(".star");
+
+const intro =
+  document.getElementById("intro");
+
+const messageCard =
+  document.getElementById("messageCard");
+
+const messageIcon =
+  document.getElementById("messageIcon");
+
+const messageTitle =
+  document.getElementById("messageTitle");
+
+const messageText =
+  document.getElementById("messageText");
+
+const continueButton =
+  document.getElementById("continueButton");
+
+const finalScreen =
+  document.getElementById("finalScreen");
+
+
+let openedStars = 0;
+
+let currentStar = null;
+
+
+/* =================================================
+   الضغط على النجوم
+================================================= */
+
+stars.forEach((star) => {
+
+  star.addEventListener("click", function(){
+
+    const index =
+      Number(this.dataset.index);
+
+    const message =
+      messages[index];
+
+    currentStar =
+      this;
+
+    messageIcon.textContent =
+      message.icon;
+
+    messageTitle.textContent =
+      message.title;
+
+    messageText.textContent =
+      message.text;
+
+    intro.style.display =
+      "none";
+
+    messageCard.classList.add(
+      "active"
+    );
+
+  });
+
+});
+
+
+/* =================================================
+   زر استمرار
+================================================= */
+
+continueButton.addEventListener(
+  "click",
+  function(){
+
+    if(currentStar){
+
+      if(
+        !currentStar.classList.contains(
+          "opened"
+        )
+      ){
+
+        currentStar.classList.add(
+          "opened"
+        );
+
+        openedStars++;
+
+      }
+
+    }
+
+    messageCard.classList.remove(
+      "active"
+    );
+
+    currentStar = null;
+
+
+    if(openedStars === messages.length){
+
+      setTimeout(function(){
+
+        finalScreen.classList.add(
+          "active"
+        );
+
+      },500);
+
+    }
+
+    else{
+
+      intro.style.display =
+        "block";
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
